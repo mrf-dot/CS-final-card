@@ -1,10 +1,6 @@
-from colorama import init
 from termcolor import cprint
 from getpass import getuser
 import commands
-
-init()
-
 
 def changeName():
     changeName = input('What would you like me to call you?: ')

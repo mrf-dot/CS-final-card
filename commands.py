@@ -5,10 +5,10 @@ from termcolor import cprint
 from prettytable import PrettyTable
 import cards
 from dice import *
-init()
 """Used to implement switcher for user functions
 
 """
+init()
 name = ''
 
 

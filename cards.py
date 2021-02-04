@@ -1,7 +1,6 @@
-from colorama import init
 from termcolor import cprint
+from colorama import init
 from re import split
-
 init()
 card_ranks = [str(x) for x in ['Ace', *range(2, 11), 'Jack', 'Queen', 'King']]
 format_cards = True
