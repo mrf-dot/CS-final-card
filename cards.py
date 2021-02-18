@@ -8,21 +8,21 @@ card_symbols = {'♠': 'Spades', '♥': 'Hearts', '♦': 'Diamonds', '♣': 'Clu
 space = lambda a: a * ' '
 
 
-def suite(symbol):
+def suit(symbol: str) -> list:
     """adds styling to all elements in the list
 
     """
-    new_suite = []
+    new_suit = []
     for x in card_ranks:
         string = f'{x}{space(6-len(x))}{symbol}'
-        new_suite.append(string)
-    return new_suite
+        new_suit.append(string)
+    return new_suit
 
 
-cards = suite('♠') + suite('♥') + suite('♦') + suite('♣')
+cards = suit('♠') + suit('♥') + suit('♦') + suit('♣')
 
 
-def cardify(card):
+def cardify(card: str):
     """Formats an element as a playing card
 
     """
@@ -36,8 +36,8 @@ def cardify(card):
         cprint(space(7), color, 'on_white')
         cprint(f'{space(3)}{reverse[1]}{space(3)}', color, 'on_white')
         cprint(space(7), color, 'on_white')
-        reverse = f'{reverse[1]}{space(6-len(reverse[0]))}{reverse[0]}'
-        cprint(reverse, color, 'on_white')
+        full_card = f'{reverse[1]}{space(6-len(reverse[0]))}{reverse[0]}'
+        cprint(full_card, color, 'on_white')
     else:
         simple = split(' +', card)
         print(f'{simple[0]} of {card_symbols[simple[1]]}')

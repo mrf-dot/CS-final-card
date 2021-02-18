@@ -17,11 +17,8 @@ def main():
     commands.help()
     while True:
         selection = input('Select an option: ').lower()
-        try:
-            getattr(commands, selection)()
-        except BaseException as e:
-            print(e)
-            cprint(f'\"{selection}\" is not a valid command.', 'red')
+        default = lambda: cprint(f'\"{selection}\" is not a valid command.', 'red')
+        getattr(commands, selection, lambda: default())()
 
 
 if __name__ == '__main__':

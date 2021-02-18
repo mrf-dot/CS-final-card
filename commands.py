@@ -1,10 +1,10 @@
 import os
-from secrets import *
+import secrets
 from colorama import init
 from termcolor import cprint
 from prettytable import PrettyTable
 import cards
-from dice import *
+import dice
 """Used to implement switcher for user functions
 
 """
@@ -21,7 +21,7 @@ def help():
         'random': 'Print a random card',
         'order': 'Print an ordered deck',
         'shuffle': 'Print a shuffled deck',
-        'dice': 'Play a game of dice',
+        'roll': 'Play a game of dice',
     }
     commands = PrettyTable()
     commands.field_names = ['Command', 'Description']
@@ -64,7 +64,7 @@ def fetch():
 def random():
     """Returns a cryptographically random element in a list
     """
-    cards.cardify(choice(cards.cards))
+    cards.cardify(secrets.choice(cards.cards))
 
 
 def order():
@@ -80,25 +80,25 @@ def shuffle():
     """
     shuf_cards = []
     while len(shuf_cards) != len(cards.cards):
-        local = choice(cards.cards)
+        local = secrets.choice(cards.cards)
         if local not in shuf_cards:
             shuf_cards.append(local)
     for x in shuf_cards:
         cards.cardify(x)
 
 
-def dice():
+def roll():
     """Plays a game of dice with an automatic system
 
     """
     global name
     dice_name = name
-    print(preperation_round)
+    print(dice.preperation_round)
     default_values = PrettyTable(['Player', 'Default value'])
     default_values.add_rows([[name, '$1000'], ['CPU', '$1250']])
     print(default_values)
-    player_sum = prep_dice(1000, 'yourself')
-    bot_sum = prep_dice(1250, 'the CPU')
-    print(main_round)
-    results = main_game(dice_name, player_sum, bot_sum)
-    recap(results)
+    player_sum = dice.prep_dice(1000, 'yourself')
+    bot_sum = dice.prep_dice(1250, 'the CPU')
+    print(dice.main_round)
+    results = dice.main_game(dice_name, player_sum, bot_sum)
+    dice.recap(results)

@@ -1,4 +1,4 @@
-from secrets import *
+from secrets import randbelow
 from colorama import init
 from termcolor import cprint
 from time import sleep
@@ -38,7 +38,7 @@ main_round.add_rows([
 ])
 
 
-def roll(entity):
+def roll(entity: str) -> int:
     """Rolls two dice, returning the sum of the rolls
     """
     one = 1 + randbelow(6)
@@ -50,19 +50,16 @@ Dice 2: {two}''')
     return (one + two)
 
 
-def prep_dice(sum, player=''):
+def prep_dice(sum: int, player='') -> int:
     print(f'How much money would you like {player} to start with?')
     try:
         player_sum = int(input('$'))
     except:
         return sum
-    if player_sum < 1:
-        return sum
-    else:
-        return player_sum
+    return sum if player_sum < 1 else player_sum
 
 
-def main_game(player, player_sum, bot_sum):
+def main_game(player: str, player_sum: int, bot_sum: int) -> list:
     turns = 0
     balance = PrettyTable(['Player', 'Balance'])
     while player_sum > 0 and bot_sum > 0:
@@ -97,14 +94,15 @@ def main_game(player, player_sum, bot_sum):
             player_sum += pot
             pot = 0
         turns += 1
+
     return [bot_sum, player_sum, turns]
 
 
-def recap(info_list):
+def recap(info_list: list):
     bot_sum, player_sum, turns = info_list
     if bot_sum == 0:
-        print(f'You won in {turns} turns.')
-        print(f'Your remaining balance was ${player_sum:,}.')
+        print(f'''You won in {turns} turns.
+Your remaining balance was ${player_sum:,}.''')
     elif player_sum == 0:
-        print(f'The CPU won in {turns} turns')
-        print(f'The CPU\'s remaining balance was ${bot_sum:,}.')
+        print(f'''The CPU won in {turns} turns
+The CPU\'s remaining balance was ${bot_sum:,}.''')
